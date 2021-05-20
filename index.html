@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+    <!-- Använd bara ett av följande script -->
+    <!-- Script för Image-tracking -->
+    <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script> -->
+
+    <!-- Script för markerbaserad-tracking -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <!-- vet inte riktigt vad detta är men låt stå -->
+    <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+
+    <style>
+      .buttons {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .say-hi-button {
+        padding: 0.25em;
+        border-radius: 4px;
+        border: none;
+        background: white;
+        color: black;
+        width: 10em;
+        height: 4em;
+      }
+    </style>
+  </head>
+
+  <body style="margin: 0px; overflow: hidden;">
+    <div class="buttons">
+      <button class="say-hi-button">
+        Öppna den här sidan i telefonen och titta på markern!
+      </button>
+    </div>
+    <!-- Container som innehåller markör + content -->
+    <a-scene
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+      embedded
+      gesture-detector
+    >
+      <!-- referens till markören -->
+      <!-- bild på markören finns i 'assets'! -->
+      <a-marker
+        id="animated-marker"
+        type="pattern"
+        preset="custom"
+        url="assets/patterns/pattern-mucklor.patt"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        cursor="fuse: false; rayOrigin: mouse;"
+        id="markerA"
+      >
+        <!-- Det som ritas upp på markören -->
+        <a-image
+          src="assets/katt.png"
+          scale="1 1 1"
+          class="clickable"
+          rotation="-90 0 0"
+          gesture-handler
+        ></a-image>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
