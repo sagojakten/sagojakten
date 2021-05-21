@@ -38,6 +38,7 @@
       <!-- referens till markören -->
       <!-- bild på markören finns i 'assets'! -->
       <a-marker
+        markerhandler
         id="animated-marker"
         type="pattern"
         preset="custom"
@@ -49,6 +50,7 @@
       >
         <!-- Det som ritas upp på markören -->
         <a-image
+          id="cat"
           src="assets/katt.png"
           scale="1 1 1"
           class="clickable"

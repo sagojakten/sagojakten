@@ -8,3 +8,11 @@ window.onload = function () {
       alert("Hi there!");
     });
 };
+
+AFRAME.registerComponent("markerhandler", {
+  init: function () {
+    this.el.sceneEl.addEventListener("click", () => {
+      alert("Hej!");
+    });
+  },
+});
