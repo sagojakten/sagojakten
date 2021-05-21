@@ -39,3 +39,5 @@ https://github.com/fcor/arjs-gestures
 https://medium.com/@fabiojcortes/manipulate-your-3d-content-with-gestures-in-ar-js-78da4c076607
 
 https://hikar.org/webapp/ex1.html
+
+https://stackoverflow.com/questions/60814283/how-to-add-click-event-to-a-image-in-ar-js
