@@ -32,4 +32,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.splash-screen .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
 }
