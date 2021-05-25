@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
 
     <!-- Använd bara ett av följande script -->
     <!-- Script för Image-tracking -->
@@ -31,17 +31,6 @@
         Öppna den här sidan i telefonen och titta på markern!
       </button>
     </div>
-    <div id="splash" class="splash-screen">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-        >&times;</a
-      >
-      <div class="splash-content">
-        <p>
-          Hej!
-        </p>
-      </div>
-    </div>
-    <span onclick="openNav()">open</span>
     <!-- Container som innehåller markör + content -->
     <a-scene
       vr-mode-ui="enabled: false;"
@@ -57,6 +46,7 @@
       <!-- referens till markören -->
       <!-- bild på markören finns i 'assets'! -->
       <a-marker
+        markerhandler
         id="animated-marker"
         type="pattern"
         preset="custom"
@@ -77,7 +67,6 @@
         >
         </a-image>
         <a-image
-          clickhandler
           src="#cat"
           scale="2 2 2"
           class="clickable"
