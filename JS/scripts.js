@@ -9,6 +9,7 @@ window.onload = function () {
     });
 };
 
+/*
 AFRAME.registerComponent("markerhandler", {
   init: function () {
     const animatedMarker = document.querySelector("#animated-marker");
@@ -25,6 +26,7 @@ AFRAME.registerComponent("markerhandler", {
     });
   },
 });
+*/
 
 AFRAME.registerComponent("clickhandler", {
   init: function () {
