@@ -33,3 +33,7 @@ AFRAME.registerComponent("clickhandler", {
     });
   },
 });
+
+function closeNav() {
+  document.getElementById("splash").style.width = "0%";
+}
