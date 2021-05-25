@@ -22,7 +22,7 @@ https://mi.sh.se/~18seah/AR/assets/patterns/pattern-mucklor.png
 
 // Testsida
 
-https://cimnex.github.io/AR/
+cimnex.github.io/transtromer-ar/ 
 
 // Diverse länkar och referenser
 
