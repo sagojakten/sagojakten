@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+
+    <!-- Använd bara ett av följande script -->
+    <!-- Script för Image-tracking -->
+    <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script> -->
+
+    <!-- Script för markerbaserad-tracking -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <!-- vet inte riktigt vad detta är men låt stå -->
+
+    <!-- länk till custom JavaScript -->
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <script>
+    /*
+        AFRAME.registerComponent("markerhandler", {
+          init: function () {
+            const animatedMarker = document.querySelector("#mucklor-marker");
+            const aEntity = document.querySelector("#findus");
+
+
+            // every click, we make our model grow in size :)
+            animatedMarker.addEventListener("click", function (ev, target) {
+              const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
+              if (aEntity && intersectedElement === aEntity) {
+                const scale = aEntity.getAttribute("scale");
+                Object.keys(scale).forEach((key) => (scale[key] = scale[key] + 1));
+                aEntity.setAttribute("scale", scale);
+              }
+            });
+          },
+        });
+    */
+    /*
+    AFRAME.registerComponent("registerevents", {
+      init: function () {
+        const marker = this.el;
+
+        marker.addEventListener("markerFound", () => {
+          var markerId = marker.id;
+          console.log("Marker Found: ", markerId);
+          if (markerId == "pettson-marker") {
+            var catEntity = document.querySelector("#findus");
+            catEntity.addEventListener("click", function () {
+              open(
+                "https://api.rightsandbrands.com//wp-content/uploads/2017/11/wsi-imageoptim-pettson-and-findus.jpg"
+              );
+            });
+          } else if (markerId == "lassemaja-marker") {
+            var lassemajaEntity = document.querySelector(
+              "#lassemaja_characters"
+            );
+            lassemajaEntity.addEventListener("click", function () {
+              open(
+                "https://www.folketshusochparker.se/wp-content/uploads/2018/12/lassemaja-e1547111960101.jpg"
+              );
+            });
+          }
+        });
+
+        marker.addEventListener("markerLost", () => {
+          var markerId = marker.id;
+          console.log("Marker Lost: ", markerId);
+        });
+      },
+    });
+    /*
+    AFRAME.registerComponent("markerhandler-pettson", {
+      init: function () {
+        const animatedMarker = document.querySelector("#pettson-marker");
+        const aEntity = document.querySelector("#findus");
+        // every click, we make our model grow in size :)
+        animatedMarker.addEventListener("click", function (ev, target) {
+          const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
+          if (aEntity && intersectedElement === aEntity) {
+            open("https://www.duckduckgo.com/");
+          }
+        });
+      },
+    });
+
+    AFRAME.registerComponent("clickhandler", {
+      init: function () {
+        var lassemajaMarker = document.querySelector("#lassemaja-marker");
+        var lassemajaEntity = document.querySelector("#lassemaja-characters");
+        // every click, we make our model grow in size :)
+        lassemajaEntity.addEventListener("click", function (ev, target) {
+          open("https://www.protonmail.com/");
+        });
+      },
+    });
+
+    AFRAME.registerComponent("cursor-listener", {
+      init: function () {
+        this.el.addEventListener("click", function (evt) {
+          console.log("I was clicked at: ", evt.detail.intersection.point);
+        });
+      },
+    });
+    */
+
+    var markerFound = 0;
+    AFRAME.registerComponent("registerevents", {
+      init: function () {
+        var elem = document.documentElement;
+        var marker = document.querySelector(".marker");
+        var lassemaja_9 = document.querySelector("#lassemaja_characters");
+        marker.addEventListener("markerFound", function (evt) {
+          markerFound = 1;
+        });
+        marker.addEventListener("markerLost", function (evt) {
+          markerFound = 0;
+        });
+        lassemaja_9.addEventListener("click", function (evt) {
+          open("https://www.duckduckgo.com/");
+        });
+      },
+      if (markerFound == 1 && markerId == "#pettson-marker") {
+
+        open("https://api.rightsandbrands.com//wp-content/uploads/2017/11/wsi-imageoptim-pettson-and-findus.jpg");
+      }
+    });
+  </script>
+
+  <body>
+    <div class="buttons">
+      <button class="say-hi-button">
+        TESTSIDA
+      </button>
+    </div>
+    <!-- Container som innehåller markör + content -->
+    <a-scene
+      id="scene"
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+      embedded
+    >
+      <a-assets>
+        <img id="cat" src="assets/katt.png" />
+        <img id="poster" src="assets/FN-poster.png" />
+        <img id="rumpnisse" src="assets/rumpnisse.png" />
+        <img id="moln" src="assets/molnet.gif" />
+        <img id="lassemaja1" src="assets/lassemaja/lassemaja1.png" />
+        <img id="lassemaja2" src="assets/lassemaja/lassemaja2.png" />
+        <img id="lassemaja3" src="assets/lassemaja/lassemaja3.png" />
+        <img id="lassemaja4" src="assets/lassemaja/lassemaja4.png" />
+        <img id="lassemaja5" src="assets/lassemaja/lassemaja5.png" />
+        <img id="lassemaja6" src="assets/lassemaja/lassemaja6.png" />
+        <img id="lassemaja7" src="assets/lassemaja/lassemaja7.png" />
+        <img id="lassemaja8" src="assets/lassemaja/lassemaja8.png" />
+        <img id="lassemaja9" src="assets/lassemaja/lassemaja9.png" />
+        <img id="lassemaja10" src="assets/lassemaja/lassemaja10.png" />
+      </a-assets>
+      <a-marker
+        markerhandler-pettson
+        registerevents
+        id="pettson-marker"
+        class="marker"
+        type="pattern"
+        preset="custom"
+        url="assets/markers/pattern-mucklor.patt"
+        cursor="rayOrigin: mouse;"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        smooth="true"
+        smoothCount="10"
+        smoothTolerance=".01"
+        smoothThreshold="5"
+      >
+        <a-image
+          id="findus"
+          src="#cat"
+          width="2"
+          height="2"
+          class="clickable"
+          rotation="270 0 0"
+          position="0 0 0"
+        ></a-image>
+      </a-marker>
+      <
+      <a-marker
+        registerevents
+        id="lassemaja-marker"
+        type="pattern"
+        preset="custom"
+        url="assets/markers/pattern-lassemaja.patt"
+        cursor="rayOrigin: mouse;"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        smooth="true"
+        smoothCount="10"
+        smoothTolerance=".01"
+        smoothThreshold="5"
+      >
+        <a-image
+          clickhandler
+          cursor-listener
+          id="lassemaja_characters"
+          src="#lassemaja1"
+          class="clickable"
+          width="3"
+          height="3"
+          position="0.208 1.163 1.023"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#lassemaja2"
+          width="1.2"
+          height="1.2"
+          class="not-clickable"
+          position="1.49 0.79 0.52"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#lassemaja3"
+          width="0.4"
+          height="0.4"
+          class="not-clickable"
+          position="0.21 0.4 -0.62"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="kicker"
+          src="#lassemaja4"
+          width="1.8"
+          height="1.8"
+          class="not-clickable"
+          position="2.13 0.5 -0.58"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="celebrator"
+          src="#lassemaja5"
+          width="1.7"
+          height="1.7"
+          class="not-clickable"
+          position="1.31 0.23 -1.89"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="goalkeeper"
+          src="#lassemaja6"
+          width="2"
+          height="2"
+          class="not-clickable"
+          position="-1.4 0.35 -1.12"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="goal"
+          src="#lassemaja7"
+          width="3"
+          height="3"
+          class="not-clickable"
+          position="-2.13 0.2 -1.8"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="bottles"
+          src="#lassemaja8"
+          width="0.6"
+          height="0.6"
+          class="not-clickable"
+          position="2.57 0.089 -2.26"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="flag"
+          src="#lassemaja9"
+          width="2"
+          height="2"
+          class="not-clickable"
+          position="2.94 0.2 -2.74"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="bounds"
+          src="#lassemaja10"
+          width="8"
+          height="8"
+          class="not-clickable"
+          position="-0.025 0.1 -2.91"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+      </a-marker>
+      <a-marker
+        id="karlsson-marker"
+        type="pattern"
+        preset="custom"
+        url="assets/markers/pattern-karlsson.patt"
+        cursor="rayOrigin: mouse;"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        smooth="true"
+      >
+      </a-marker>
+      <a-marker
+        id="roda_masken-marker"
+        type="pattern"
+        preset="custom"
+        url="assets/markers/pattern-roda_masken.patt"
+        cursor="rayOrigin: mouse;"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        smooth="true"
+      >
+      </a-marker>
+      <a-marker
+        id="rumpnisse-marker"
+        type="pattern"
+        preset="custom"
+        url="assets/markers/pattern-rumpnisse.patt"
+        cursor="rayOrigin: mouse;"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        smooth="true"
+      >
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
