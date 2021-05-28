@@ -18,6 +18,7 @@
     <!-- vet inte riktigt vad detta är men låt stå -->
 
     <!-- länk till custom JavaScript -->
+    <script src="js/scripts.js"></script>
     <link href="styles.css" rel="stylesheet" type="text/css" />
   </head>
   <script>
@@ -41,38 +42,6 @@
         });
     */
 
-    AFRAME.registerComponent("registerevents", {
-      init: function () {
-        const marker = this.el;
-
-        marker.addEventListener("markerFound", () => {
-          var markerId = marker.id;
-          console.log("Marker Found: ", markerId);
-          if (markerId == "pettson-marker") {
-            var pettsonEntity = document.querySelector("#pettson_character");
-            pettsonEntity.addEventListener("click", function () {
-              open(
-                "https://api.rightsandbrands.com//wp-content/uploads/2017/11/wsi-imageoptim-pettson-and-findus.jpg"
-              );
-            });
-          } else if (markerId == "lassemaja-marker") {
-            var lassemajaEntity = document.querySelector(
-              "#lassemaja_characters"
-            );
-            lassemajaEntity.addEventListener("click", function () {
-              open(
-                "https://www.folketshusochparker.se/wp-content/uploads/2018/12/lassemaja-e1547111960101.jpg"
-              );
-            });
-          }
-        });
-
-        marker.addEventListener("markerLost", () => {
-          var markerId = marker.id;
-          console.log("Marker Lost: ", markerId);
-        });
-      },
-    });
     /*
     AFRAME.registerComponent("markerhandler-pettson", {
       init: function () {
@@ -115,6 +84,9 @@
         TESTSIDA
       </button>
     </div>
+    <div class="arjs-loader">
+      <div>Loading, please wait...</div>
+    </div>
     <!-- Container som innehåller markör + content -->
     <a-scene
       id="scene"
@@ -125,10 +97,32 @@
     >
       <!-- Load assets into aframe -->
       <a-assets>
-        <img id="cat" src="assets/katt.png" />
-        <img id="poster" src="assets/FN-poster.png" />
-        <img id="rumpnisse" src="assets/rumpnisse.png" />
-        <img id="moln" src="assets/molnet.gif" />
+        <!-- BEGIN: sound assets -->
+        <audio
+          id="pettson_sound"
+          src="assets/ljud/pettson.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="lassemaja_sound"
+          src="assets/ljud/lassemaja.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="roda_masken_sound"
+          src="assets/ljud/roda_masken.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="rumpnisse_sound"
+          src="assets/ljud/rumpnisse.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="karlsson_sound"
+          src="assets/ljud/karlsson_trudelutt.mp3"
+          preload="auto"
+        ></audio>
         <!-- BEGIN: lassemaja assets -->
         <img id="lassemaja1" src="assets/lassemaja/lassemaja1.png" />
         <img id="lassemaja2" src="assets/lassemaja/lassemaja2.png" />
@@ -156,6 +150,20 @@
         <img id="muckla4" src="assets/pettson/muckla4.png" />
         <img id="muckla5" src="assets/pettson/muckla5.png" />
         <!-- END: Petsson assets -->
+        <!-- BEGIN: Röda Masken assets -->
+        <img id="monster" src="assets/roda_masken/monster.png" />
+        <img id="trees" src="assets/roda_masken/trees.png" />
+        <img id="trees_house" src="assets/roda_masken/trees_house.png" />
+        <img id="roda_masken" src="assets/roda_masken/roda_masken.png" />
+        <img id="swing" src="assets/roda_masken/swing.png" />
+        <img id="house" src="assets/roda_masken/roda_masken_hus.png" />
+        <!-- END: Röda Masken assets -->
+        <!-- BEGIN: Ronja assets -->
+        <img id="ronja_bg" src="assets/ronja/Ronja-bak.png" />
+        <img id="rumpnisse1" src="assets/ronja/Ronja1.png" />
+        <img id="rumpnisse2" src="assets/ronja/Ronja2.png" />
+        <img id="rumpnisse3" src="assets/ronja/Ronja3.png" />
+        <img id="propeller" src="assets/ronja/Ronja4.png" />
       </a-assets>
       <!-- End of assets -->
 
@@ -180,10 +188,10 @@
           width="8"
           height="8"
           src="#pettson"
+          sound="src: #pettson_sound; autoplay: false;"
           class="clickable"
           position="0 0.2 -1.4"
           rotation="270 0 0"
-          color="#FFFFFF"
         ></a-image>
         <a-image
           width="1.792295"
@@ -192,7 +200,6 @@
           class="not-clickable"
           position="-2.969 0.9310001 1.18"
           rotation="270 0 0"
-          color="#FFFFFF"
         ></a-image>
         <a-image
           width="0.67"
@@ -201,7 +208,6 @@
           class="not-clickable"
           position="1.92 1.373 1.47"
           rotation="270 0 0"
-          color="#FFFFFF"
         ></a-image>
         <a-image
           width="1"
@@ -210,7 +216,6 @@
           class="not-clickable"
           position="2.4 1.306 1.48"
           rotation="270 0 0"
-          color="#FFFFFF"
         ></a-image>
         <a-image
           width="1.120606"
@@ -219,7 +224,6 @@
           class="not-clickable"
           position="-1.15 0.91 1.431"
           rotation="270 0 0"
-          color="#FFFFFF"
         ></a-image>
         <a-image
           width="0.7704024"
@@ -228,7 +232,6 @@
           class="not-clickable"
           position="1.997 1.411 1.951"
           rotation="270 0 0"
-          color="#FFFFFF"
         ></a-image>
         <a-image
           width="1.135012"
@@ -237,7 +240,6 @@
           class="not-clickable"
           position="-1.721 1.354 1.641"
           rotation="270 0 0"
-          color="#FFFFFF"
         ></a-image>
         <a-image
           width="1.28"
@@ -246,7 +248,6 @@
           class="not-clickable"
           position="0.05 2.117 1.521"
           rotation="270 0 0"
-          color="#FFFFFF"
         ></a-image>
         <a-image
           width="1.088"
@@ -255,7 +256,6 @@
           class="not-clickable"
           position="1.0319 2.117 1.521"
           rotation="270 0 0"
-          color="#FFFFFF"
         ></a-image>
         <a-image
           width="2.002803"
@@ -264,7 +264,6 @@
           class="not-clickable"
           position="3.65 1.61 1.06"
           rotation="270 0 0"
-          color="#FFFFFF"
         ></a-image>
       </a-marker>
       <!-- END: PETTSON -->
@@ -388,6 +387,7 @@
 
       <!-- KARLSSON börjar här -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
       <a-marker
+        registerevents
         id="karlsson-marker"
         type="pattern"
         preset="custom"
@@ -402,29 +402,29 @@
       >
         <a-image
           id="city"
-          width="5.016667"
-          height="5.016667"
           src="#city_silhouette"
+          width="8"
+          height="8"
           class="not-clickable"
-          position="0 0.17 -1.89"
+          position="0 0.17 -2.06"
           rotation="270 0 0"
           alpha-test="0.5"
         ></a-image>
         <a-image
           id="karlsson_character"
-          width="3"
-          height="3"
           src="#karlsson"
+          width="6"
+          height="6"
           class="clickable"
-          position="-0.4 0.92 -2.16"
+          position="-0.93 0.92 -2.16"
           rotation="270 0 0"
           alpha-test="0.5"
         ></a-image>
         <a-image
           id="bird_1"
+          src="#bird"
           width="0.31521"
           height="0.31521"
-          src="#bird"
           class="non-clickable"
           position="-1.251 0.27 -0.626"
           rotation="270 -337.3832 0"
@@ -432,9 +432,9 @@
         ></a-image>
         <a-image
           id="bird_2"
+          src="#bird"
           width="0.22172"
           height="0.22172"
-          src="#bird"
           class="non-clickable"
           position="1.089 0.232 -0.917"
           rotation="270 0 0"
@@ -442,9 +442,9 @@
         ></a-image>
         <a-image
           id="bird_3"
+          src="#bird"
           width="0.1280588"
           height="0.1280588"
-          src="#bird"
           class="non-clickable"
           position="0.8321 0.126 -0.9899999"
           rotation="271.4727 -224.278 -114.7656"
@@ -455,21 +455,108 @@
       <!-- RÖDA MASKEN börjar här -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
       <a-marker
+        registerevents
         id="roda_masken-marker"
         type="pattern"
         preset="custom"
-        url="assets/markers/pattern-roda_masken.patt"
+        url="assets/markers/pattern-Rodamasken.patt"
         cursor="rayOrigin: mouse;"
         raycaster="objects: .clickable"
         emitevents="true"
         smooth="true"
+        smoothCount="10"
+        smoothTolerance=".01"
+        smoothThreshold="5"
       >
+        <a-image
+          src="#house"
+          width="5"
+          height="5"
+          class="not-clickable"
+          position="0 0.704 0"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          width="3.231528"
+          height="3.231528"
+          src="#trees_house"
+          class="not-clickable"
+          position="-3.546 0.391 0.616"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#swing"
+          width="4"
+          height="4"
+          class="not-clickable"
+          position="-2.896 2.09 2.04"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="roda_masken_character"
+          src="#roda_masken"
+          width="8"
+          height="8"
+          class="clickable"
+          position="0 3.73 -1.57"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#trees"
+          width="1.6987"
+          height="1.6987"
+          class="not-clickable"
+          position="2.55 0.28 0.72"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#trees_house"
+          width="3.0181"
+          height="3.0181"
+          class="not-clickable"
+          position="2.92 0.45 0.54"
+          rotation="90 -180 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#trees"
+          width="1.6987"
+          height="1.6987"
+          class="not-clickable"
+          position="-3.12 0.28 0.72"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#trees"
+          width="1.220991"
+          height="1.220991"
+          class="not-clickable"
+          position="-4.97 0.27 1.05"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#monster"
+          width="2.988942"
+          height="2.988942"
+          class="not-clickable"
+          position="-3.34 0.01 -0.38"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
       </a-marker>
 
       <!-- RONJA börjar här -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
       <a-marker
-        id="rumpnisse-marker"
+        registerevents
+        id="ronja-marker"
         type="pattern"
         preset="custom"
         url="assets/markers/pattern-rumpnisse.patt"
@@ -477,7 +564,56 @@
         raycaster="objects: .clickable"
         emitevents="true"
         smooth="true"
+        smoothCount="10"
+        smoothTolerance=".01"
+        smoothThreshold="5"
       >
+        <a-image
+          src="#ronja_bg"
+          width="8"
+          height="8"
+          class="not-clickable"
+          position="0 0.83 -0.76"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="rumpnisse_clickable"
+          src="#rumpnisse1"
+          width="1.886551"
+          height="1.886551"
+          class="clickable"
+          position="-1.116 2.4 0.38"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#rumpnisse2"
+          width="1"
+          height="1"
+          class="not-clickable"
+          position="1.27 1.96 0.16"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#rumpnisse3"
+          width="1"
+          height="1"
+          class="not-clickable"
+          position="-0.4 1.55 0.47"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#propeller"
+          width="1.464"
+          height="1.464"
+          class="not-clickable"
+          position="-1.404 1.43 -1.29"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
