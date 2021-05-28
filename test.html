@@ -6,128 +6,71 @@
       name="viewport"
       content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
+    <title>Sagojakten</title>
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-
-    <!-- Använd bara ett av följande script -->
-    <!-- Script för Image-tracking -->
-    <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script> -->
-
-    <!-- Script för markerbaserad-tracking -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-
-    <!-- vet inte riktigt vad detta är men låt stå -->
-
-    <!-- länk till custom JavaScript -->
     <link href="styles.css" rel="stylesheet" type="text/css" />
   </head>
+
   <script>
-    /*
-        AFRAME.registerComponent("markerhandler", {
-          init: function () {
-            const animatedMarker = document.querySelector("#mucklor-marker");
-            const aEntity = document.querySelector("#findus");
+    var markerList = [];
+    var soundList = [];
+    var entityList = [];
+    var characters = [
+      "pettson",
+      "lassemaja",
+      "roda_masken",
+      "rumpnisse",
+      "karlsson",
+    ];
+    for (let i = 0; i < characters.length; i++) {
+      markerList.push(characters[i] + "-marker");
+      soundList.push("#" + characters[i] + "-sound");
+      entityList.push("#" + characters[i] + "-character");
+    }
 
-
-            // every click, we make our model grow in size :)
-            animatedMarker.addEventListener("click", function (ev, target) {
-              const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
-              if (aEntity && intersectedElement === aEntity) {
-                const scale = aEntity.getAttribute("scale");
-                Object.keys(scale).forEach((key) => (scale[key] = scale[key] + 1));
-                aEntity.setAttribute("scale", scale);
-              }
-            });
-          },
-        });
-    */
-    /*
     AFRAME.registerComponent("registerevents", {
       init: function () {
         const marker = this.el;
+        var markerId = marker.id;
+
+        function markerLoop(markerList, entityList, soundList) {
+          for (let i = 0; i <= markerList.length; i++) {
+            if (markerId == markerList[i]) {
+              var entity = document.querySelector(entityList[i]);
+              var sound = document.querySelector(soundList[i]);
+              entity.addEventListener("click", function () {
+                if (sound.paused) {
+                  sound.play();
+                  console.log(sound);
+                } else {
+                  sound.pause();
+                  console.log(sound);
+                }
+              });
+            }
+          }
+        }
+
+        function markerSounds(markerList, soundList) {
+          for (let i = 0; i <= soundList.length; i++) {
+            if (markerId == markerList[i]) {
+              var sound = document.querySelector(soundList[i]);
+              sound.pause();
+              console.log(sound.paused);
+            }
+          }
+        }
 
         marker.addEventListener("markerFound", () => {
-          var markerId = marker.id;
           console.log("Marker Found: ", markerId);
-          if (markerId == "pettson-marker") {
-            var catEntity = document.querySelector("#findus");
-            catEntity.addEventListener("click", function () {
-              open(
-                "https://api.rightsandbrands.com//wp-content/uploads/2017/11/wsi-imageoptim-pettson-and-findus.jpg"
-              );
-            });
-          } else if (markerId == "lassemaja-marker") {
-            var lassemajaEntity = document.querySelector(
-              "#lassemaja_characters"
-            );
-            lassemajaEntity.addEventListener("click", function () {
-              open(
-                "https://www.folketshusochparker.se/wp-content/uploads/2018/12/lassemaja-e1547111960101.jpg"
-              );
-            });
-          }
+          markerLoop(markerList, entityList, soundList);
         });
-
         marker.addEventListener("markerLost", () => {
-          var markerId = marker.id;
           console.log("Marker Lost: ", markerId);
+          markerSounds(markerList, soundList);
         });
       },
-    });
-    /*
-    AFRAME.registerComponent("markerhandler-pettson", {
-      init: function () {
-        const animatedMarker = document.querySelector("#pettson-marker");
-        const aEntity = document.querySelector("#findus");
-        // every click, we make our model grow in size :)
-        animatedMarker.addEventListener("click", function (ev, target) {
-          const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
-          if (aEntity && intersectedElement === aEntity) {
-            open("https://www.duckduckgo.com/");
-          }
-        });
-      },
-    });
-
-    AFRAME.registerComponent("clickhandler", {
-      init: function () {
-        var lassemajaMarker = document.querySelector("#lassemaja-marker");
-        var lassemajaEntity = document.querySelector("#lassemaja-characters");
-        // every click, we make our model grow in size :)
-        lassemajaEntity.addEventListener("click", function (ev, target) {
-          open("https://www.protonmail.com/");
-        });
-      },
-    });
-
-    AFRAME.registerComponent("cursor-listener", {
-      init: function () {
-        this.el.addEventListener("click", function (evt) {
-          console.log("I was clicked at: ", evt.detail.intersection.point);
-        });
-      },
-    });
-    */
-
-    var markerFound = 0;
-    AFRAME.registerComponent("registerevents", {
-      init: function () {
-        var elem = document.documentElement;
-        var marker = document.querySelector(".marker");
-        var lassemaja_9 = document.querySelector("#lassemaja_characters");
-        marker.addEventListener("markerFound", function (evt) {
-          markerFound = 1;
-        });
-        marker.addEventListener("markerLost", function (evt) {
-          markerFound = 0;
-        });
-        lassemaja_9.addEventListener("click", function (evt) {
-          open("https://www.duckduckgo.com/");
-        });
-      },
-      if (markerFound == 1 && markerId == "#pettson-marker") {
-
-        open("https://api.rightsandbrands.com//wp-content/uploads/2017/11/wsi-imageoptim-pettson-and-findus.jpg");
-      }
     });
   </script>
 
@@ -145,11 +88,36 @@
       arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
       embedded
     >
+      <!-- Load assets into aframe -->
       <a-assets>
-        <img id="cat" src="assets/katt.png" />
-        <img id="poster" src="assets/FN-poster.png" />
-        <img id="rumpnisse" src="assets/rumpnisse.png" />
-        <img id="moln" src="assets/molnet.gif" />
+        <!-- BEGIN: sound assets -->
+        <audio
+          id="pettson-sound"
+          src="assets/ljud/pettson.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="lassemaja-sound"
+          src="assets/ljud/lassemaja.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="roda_masken-sound"
+          src="assets/ljud/roda_masken.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="rumpnisse-sound"
+          src="assets/ljud/rumpnisse.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="karlsson-sound"
+          src="assets/ljud/karlsson_trudelutt.mp3"
+          preload="auto"
+        ></audio>
+        <!-- END: Sound assets -->
+        <!-- BEGIN: lassemaja assets -->
         <img id="lassemaja1" src="assets/lassemaja/lassemaja1.png" />
         <img id="lassemaja2" src="assets/lassemaja/lassemaja2.png" />
         <img id="lassemaja3" src="assets/lassemaja/lassemaja3.png" />
@@ -160,12 +128,44 @@
         <img id="lassemaja8" src="assets/lassemaja/lassemaja8.png" />
         <img id="lassemaja9" src="assets/lassemaja/lassemaja9.png" />
         <img id="lassemaja10" src="assets/lassemaja/lassemaja10.png" />
+        <!-- END: lassemaja assets -->
+        <!-- BEGIN: Karlsson assets -->
+        <img id="karlsson" src="assets/karlsson/karlsson.png" />
+        <img id="bird" src="assets/karlsson/bird.png" />
+        <img id="city_silhouette" src="assets/karlsson/city.png" />
+        <!-- END: Karlsson assets -->
+        <!-- BEGIN: Petsson assets -->
+        <img id="chickens" src="assets/pettson/chickens.png" />
+        <img id="flower" src="assets/pettson/flower.png" />
+        <img id="pettson" src="assets/pettson/pettson.png" />
+        <img id="muckla1" src="assets/pettson/muckla1.png" />
+        <img id="muckla2" src="assets/pettson/muckla2.png" />
+        <img id="muckla3" src="assets/pettson/muckla3.png" />
+        <img id="muckla4" src="assets/pettson/muckla4.png" />
+        <img id="muckla5" src="assets/pettson/muckla5.png" />
+        <!-- END: Petsson assets -->
+        <!-- BEGIN: Röda Masken assets -->
+        <img id="monster" src="assets/roda_masken/monster.png" />
+        <img id="trees" src="assets/roda_masken/trees.png" />
+        <img id="trees_house" src="assets/roda_masken/trees_house.png" />
+        <img id="roda_masken" src="assets/roda_masken/roda_masken.png" />
+        <img id="swing" src="assets/roda_masken/swing.png" />
+        <img id="house" src="assets/roda_masken/roda_masken_hus.png" />
+        <!-- END: Röda Masken assets -->
+        <!-- BEGIN: Ronja assets -->
+        <img id="ronja_bg" src="assets/ronja/Ronja-bak.png" />
+        <img id="rumpnisse1" src="assets/ronja/Ronja1.png" />
+        <img id="rumpnisse2" src="assets/ronja/Ronja2.png" />
+        <img id="rumpnisse3" src="assets/ronja/Ronja3.png" />
+        <img id="propeller" src="assets/ronja/Ronja4.png" />
       </a-assets>
+      <!-- End of assets -->
+
+      <!-- BEGIN: PETTSON -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
       <a-marker
         markerhandler-pettson
         registerevents
         id="pettson-marker"
-        class="marker"
         type="pattern"
         preset="custom"
         url="assets/markers/pattern-mucklor.patt"
@@ -178,16 +178,90 @@
         smoothThreshold="5"
       >
         <a-image
-          id="findus"
-          src="#cat"
-          width="2"
-          height="2"
+          id="pettson-character"
+          width="8"
+          height="8"
+          src="#pettson"
           class="clickable"
+          position="0 0.2 -1.4"
           rotation="270 0 0"
-          position="0 0 0"
+        ></a-image>
+        <a-image
+          width="1.792295"
+          height="1.792295"
+          src="#muckla1"
+          class="not-clickable"
+          position="-2.969 0.9310001 1.18"
+          rotation="270 0 0"
+        ></a-image>
+        <a-image
+          width="0.67"
+          height="0.67"
+          src="#flower"
+          class="not-clickable"
+          position="1.92 1.373 1.47"
+          rotation="270 0 0"
+        ></a-image>
+        <a-image
+          width="1"
+          height="1"
+          src="#flower"
+          class="not-clickable"
+          position="2.4 1.306 1.48"
+          rotation="270 0 0"
+        ></a-image>
+        <a-image
+          width="1.120606"
+          height="1.120606"
+          src="#flower"
+          class="not-clickable"
+          position="-1.15 0.91 1.431"
+          rotation="270 0 0"
+        ></a-image>
+        <a-image
+          width="0.7704024"
+          height="0.7704024"
+          src="#muckla2"
+          class="not-clickable"
+          position="1.997 1.411 1.951"
+          rotation="270 0 0"
+        ></a-image>
+        <a-image
+          width="1.135012"
+          height="1.135012"
+          src="#muckla5"
+          class="not-clickable"
+          position="-1.721 1.354 1.641"
+          rotation="270 0 0"
+        ></a-image>
+        <a-image
+          width="1.28"
+          height="1.28"
+          src="#muckla4"
+          class="not-clickable"
+          position="0.05 2.117 1.521"
+          rotation="270 0 0"
+        ></a-image>
+        <a-image
+          width="1.088"
+          height="1.088"
+          src="#muckla3"
+          class="not-clickable"
+          position="1.0319 2.117 1.521"
+          rotation="270 0 0"
+        ></a-image>
+        <a-image
+          width="2.002803"
+          height="2.002803"
+          src="#chickens"
+          class="not-clickable"
+          position="3.65 1.61 1.06"
+          rotation="270 0 0"
         ></a-image>
       </a-marker>
-      <
+      <!-- END: PETTSON -->
+
+      <!-- BEGIN: LASSEMAJA -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
       <a-marker
         registerevents
         id="lassemaja-marker"
@@ -205,8 +279,9 @@
         <a-image
           clickhandler
           cursor-listener
-          id="lassemaja_characters"
+          id="lassemaja-character"
           src="#lassemaja1"
+          sound="src:#lassemaja-sound; autoplay: false;"
           class="clickable"
           width="3"
           height="3"
@@ -303,7 +378,10 @@
           alpha-test="0.5"
         ></a-image>
       </a-marker>
+
+      <!-- KARLSSON börjar här -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
       <a-marker
+        registerevents
         id="karlsson-marker"
         type="pattern"
         preset="custom"
@@ -312,20 +390,168 @@
         raycaster="objects: .clickable"
         emitevents="true"
         smooth="true"
+        smoothCount="10"
+        smoothTolerance=".01"
+        smoothThreshold="5"
       >
+        <a-image
+          id="city"
+          src="#city_silhouette"
+          width="8"
+          height="8"
+          class="not-clickable"
+          position="0 0.17 -2.06"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="karlsson-character"
+          src="#karlsson"
+          width="6"
+          sound="src: #karlsson-sound; autoplay: false;"
+          height="6"
+          class="clickable"
+          position="-0.93 0.92 -2.16"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="bird_1"
+          src="#bird"
+          width="0.31521"
+          height="0.31521"
+          class="non-clickable"
+          position="-1.251 0.27 -0.626"
+          rotation="270 -337.3832 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="bird_2"
+          src="#bird"
+          width="0.22172"
+          height="0.22172"
+          class="non-clickable"
+          position="1.089 0.232 -0.917"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="bird_3"
+          src="#bird"
+          width="0.1280588"
+          height="0.1280588"
+          class="non-clickable"
+          position="0.8321 0.126 -0.9899999"
+          rotation="271.4727 -224.278 -114.7656"
+          alpha-test="0.5"
+        ></a-image>
       </a-marker>
+
+      <!-- RÖDA MASKEN börjar här -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
       <a-marker
+        registerevents
         id="roda_masken-marker"
         type="pattern"
         preset="custom"
-        url="assets/markers/pattern-roda_masken.patt"
+        url="assets/markers/pattern-Rodamasken.patt"
         cursor="rayOrigin: mouse;"
         raycaster="objects: .clickable"
         emitevents="true"
         smooth="true"
+        smoothCount="10"
+        smoothTolerance=".01"
+        smoothThreshold="5"
       >
+        <a-image
+          src="#house"
+          width="5"
+          height="5"
+          class="not-clickable"
+          position="0 0.704 0"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          width="3.231528"
+          height="3.231528"
+          src="#trees_house"
+          class="not-clickable"
+          position="-3.546 0.391 0.616"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#swing"
+          width="4"
+          height="4"
+          class="not-clickable"
+          position="-2.896 2.09 2.04"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="roda_masken-character"
+          src="#roda_masken"
+          sound="src: #roda_masken-sound; autoplay: false;"
+          width="8"
+          height="8"
+          class="clickable"
+          position="0 3.73 -1.57"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#trees"
+          width="1.6987"
+          height="1.6987"
+          class="not-clickable"
+          position="2.55 0.28 0.72"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#trees_house"
+          width="3.0181"
+          height="3.0181"
+          class="not-clickable"
+          position="2.92 0.45 0.54"
+          rotation="90 -180 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#trees"
+          width="1.6987"
+          height="1.6987"
+          class="not-clickable"
+          position="-3.12 0.28 0.72"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#trees"
+          width="1.220991"
+          height="1.220991"
+          class="not-clickable"
+          position="-4.97 0.27 1.05"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#monster"
+          width="2.988942"
+          height="2.988942"
+          class="not-clickable"
+          position="-3.34 0.01 -0.38"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
       </a-marker>
+
+      <!-- RONJA börjar här -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
       <a-marker
+        registerevents
         id="rumpnisse-marker"
         type="pattern"
         preset="custom"
@@ -334,7 +560,57 @@
         raycaster="objects: .clickable"
         emitevents="true"
         smooth="true"
+        smoothCount="10"
+        smoothTolerance=".01"
+        smoothThreshold="5"
       >
+        <a-image
+          src="#ronja_bg"
+          width="8"
+          height="8"
+          class="not-clickable"
+          position="0 0.83 -0.76"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          id="rumpnisse-character"
+          src="#rumpnisse1"
+          sound="src: #rumpnisse-sound; autoplay: false;"
+          width="1.886551"
+          height="1.886551"
+          class="clickable"
+          position="-1.116 2.4 0.38"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#rumpnisse2"
+          width="1"
+          height="1"
+          class="not-clickable"
+          position="1.27 1.96 0.16"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#rumpnisse3"
+          width="1"
+          height="1"
+          class="not-clickable"
+          position="-0.4 1.55 0.47"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
+        <a-image
+          src="#propeller"
+          width="1.464"
+          height="1.464"
+          class="not-clickable"
+          position="-1.404 1.43 -1.29"
+          rotation="270 0 0"
+          alpha-test="0.5"
+        ></a-image>
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
