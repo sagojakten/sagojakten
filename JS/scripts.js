@@ -81,18 +81,23 @@ AFRAME.registerComponent("registerevents", {
       console.log("Marker Lost: ", markerId);
 
       if (markerId == "pettson-marker") {
+        var pettsonSound = document.querySelector("#pettson_sound");
         pettsonSound.pause();
       }
       if (markerId == "lassemaja-marker") {
+        var lassemajaSound = document.querySelector("#lassemaja_sound");
         lassemajaSound.pause();
       }
       if (markerId == "roda_masken-marker") {
+        var roda_maskenSound = document.querySelector("#roda_masken_sound");
         roda_maskenSound.pause();
       }
       if (markerId == "rumpnisse-marker") {
+        var rumpnisseSound = document.querySelector("#rumpnisse_sound");
         rumpnisseSound.pause();
       }
       if (markerId == "karlsson-marker") {
+        var karlssonSound = document.querySelector("#karlsson_sound");
         karlssonSound.pause();
       }
     });
