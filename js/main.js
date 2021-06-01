@@ -17,7 +17,7 @@ for (let i = 0; i < characters.length; i++) {
 
 AFRAME.registerComponent("registerevents", {
   init: function () {
-    const marker = this.el;
+    var marker = this.el;
     var markerId = marker.id;
 
     /*
@@ -43,7 +43,7 @@ AFRAME.registerComponent("registerevents", {
                 }
         */
 
-    marker.addEventListener("markerFound", () => {
+    marker.addEventListener("markerFound", function () {
       console.log("Marker Found: ", markerId);
       //  markerLoop(markerList, entityList);
       for (let i = 0; i <= markerList.length; i++) {
@@ -58,7 +58,7 @@ AFRAME.registerComponent("registerevents", {
           .addEventListener("click", function () {
             togglePlay(sound);
           });
-        marker.addEventListener("markerLost", () => {
+        marker.addEventListener("markerLost", function () {
           console.log("Marker Lost: ", markerId);
           togglePlay(sound);
         });
