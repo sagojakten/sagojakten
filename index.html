@@ -2,24 +2,32 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <!-- disallow user from changing viewport scale -->
     <meta
       name="viewport"
       content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
     <title>Sagojakten</title>
     <link rel="icon" href="favicon.ico" />
+    <!-- load A-Frame library -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <!-- load AR.js/aframe + marker based -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <!-- load howler.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
+    <!-- load custom CSS -->
     <link href="styles.css" rel="stylesheet" type="text/css" />
+    <!-- load fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap"
       rel="stylesheet"
     />
+    <!-- load custom javascript -->
     <script src="js/main.js"></script>
   </head>
 
   <body>
+    <!-- div containing the splash screen with information about the website -->
     <div class="startScreen">
       <header>
         <h1>Sagojakten</h1>
@@ -27,10 +35,18 @@
       <img class="enterButton" src="assets/logga.png" />
       <h2>Tryck på propellern för att starta!</h2>
       <p>
-        Sagojakten är en AR-upplevelse för Tranströmerbiblioteket vid
-        Medborgarplatsen i Stockholm.<br /><br />
+        Sagojakten är en AR-upplevelse för Tranströmerbiblioteket vid Stockholm.
+        Byggd av elever vid Södertörns Högskola under våren 2021.<br /><br />
+        Mer information om projektet och källkod finns på
+        <a href="https://github.com/cimnex/cimnex.github.io">GitHub</a>.
+        <br /><br />Projektgruppen består av: <br />Alethe Hjuberger<br />
+        Erika Trygg<br />
+        Mikaela Matatko<br />
+        Sebastian Åhman<br />
+        Shan Gazi
       </p>
     </div>
+
     <div class="buttons">
       <button class="say-hi-button">
         Paus
