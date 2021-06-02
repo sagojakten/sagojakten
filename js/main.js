@@ -1,6 +1,6 @@
 var markerList = [];
-var soundList = [];
-var entityList = [];
+//var soundList = [];
+//var entityList = [];
 var characters = [
   "pettson",
   "lassemaja",
@@ -11,8 +11,8 @@ var characters = [
 
 for (let i = 0; i < characters.length; i++) {
   markerList.push(characters[i] + "-marker");
-  soundList.push("#" + characters[i] + "-sound");
-  entityList.push("#" + characters[i] + "-character");
+  //soundList.push("#" + characters[i] + "-sound");
+  //entityList.push("#" + characters[i] + "-character");
 }
 
 AFRAME.registerComponent("registerevents", {
