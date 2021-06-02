@@ -11,7 +11,7 @@ body {
   align-items: center;
   height: 100vh;
   text-align: center;
-  overflow: auto;
+  overflow: scroll;
 }
 
 h1 {
@@ -26,16 +26,29 @@ h1 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 20%;
+  max-width: 20%;
 }
 
-.startScreen p {
-  align-items: center;
+p {
   text-align: left;
+  font-size: 3vw;
+  word-wrap: break-word;
+  font-family: "Sora", sans-serif;
+  position: fixed;
+  left: 10%;
+  right: 10%;
+}
+
+h2 {
+  font-size: 5vw;
+}
+
+.line {
+  border-top: 6px solid #fbf293;
+  width: 80vw;
+  align-items: center;
   margin-left: auto;
   margin-right: auto;
-  width: 40%;
-  font-family: "Sora", sans-serif;
 }
 
 .buttons {
