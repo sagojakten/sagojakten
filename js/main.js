@@ -9,8 +9,10 @@ var characters = [
   "karlsson",
 ];
 
-if (window.matchMedia("(hover: hover)").matches) {
-  location.replace("https://sagojakten.se/intro");
+console.log(matchMedia("(any-pointer:fine)").matches);
+
+if (window.matchMedia("(any-pointer: coarse)", "(any-pointer:fine)").matches) {
+  location.replace("intro");
 }
 
 for (let i = 0; i < characters.length; i++) {
