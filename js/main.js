@@ -9,10 +9,9 @@ var characters = [
   "karlsson",
 ];
 
-console.log(matchMedia("(any-pointer:fine)").matches);
-
-if (window.matchMedia("(any-pointer: coarse)", "(any-pointer:fine)").matches) {
+if (window.matchMedia("(min-width: 768px)").matches) {
   location.replace("intro");
+  console.log(matchMedia("(any-pointer:fine)").matches);
 }
 
 for (let i = 0; i < characters.length; i++) {
