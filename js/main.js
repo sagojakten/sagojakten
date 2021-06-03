@@ -9,6 +9,10 @@ var characters = [
   "karlsson",
 ];
 
+if (window.matchMedia("(hover: hover)").matches) {
+  location.replace("https://sagojakten.se/intro");
+}
+
 for (let i = 0; i < characters.length; i++) {
   markerList.push(characters[i] + "-marker");
   //soundList.push("#" + characters[i] + "-sound");
