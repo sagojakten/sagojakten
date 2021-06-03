@@ -1,6 +1,7 @@
 body {
   margin: 0px;
   overflow: hidden;
+  font-family: "Sora", sans-serif;
 }
 
 .startScreen {
@@ -32,7 +33,6 @@ p {
   text-align: left;
   font-size: 3vw;
   word-wrap: break-word;
-  font-family: "Varela Round", sans-serif;
   position: fixed;
   left: 10%;
   right: 10%;
@@ -40,7 +40,6 @@ p {
 
 h2 {
   font-size: 5vw;
-  font-family: "Varela Round", sans-serif;
 }
 
 .line {
